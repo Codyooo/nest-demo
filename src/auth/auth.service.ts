@@ -3,7 +3,7 @@
  * @author: hufan
  * @Date: 2020-08-31 14:37:14
  * @LastEditors: hufan
- * @LastEditTime: 2020-09-02 16:37:05
+ * @LastEditTime: 2020-09-09 14:20:36
  */
 import {
   Injectable,
@@ -40,7 +40,10 @@ export class AuthService {
 
     return {
       ...user.toJSON(),
-      access_token: this.jwtService.sign({ username: user.username }),
+      access_token: this.jwtService.sign({
+        username: user.username,
+        id: user.id,
+      }),
     };
   }
 
@@ -49,6 +52,6 @@ export class AuthService {
 
     const user = await this.validateUser(username, password);
     if (!user) throw new UnauthorizedException('');
-    return { access_token: this.jwtService.sign({ username }) };
+    return { access_token: this.jwtService.sign({ username, id: user.id }) };
   }
 }

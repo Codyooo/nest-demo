@@ -3,7 +3,7 @@
  * @author: hufan
  * @Date: 2020-08-31 11:57:19
  * @LastEditors: hufan
- * @LastEditTime: 2020-08-31 14:43:54
+ * @LastEditTime: 2020-09-11 16:41:31
  */
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
@@ -12,6 +12,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { GameModule } from './game/game.module';
+import { CommentsModule } from './comments/comments.module';
+import { UploadModule } from './upload/upload.module';
+import { LoggerModule } from './logger/logger.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -31,6 +37,13 @@ import { AuthModule } from './auth/auth.module';
     }),
     UserModule,
     AuthModule,
+    GameModule,
+    CommentsModule,
+    UploadModule,
+    LoggerModule,
+    // ServeStaticModule.forRoot({
+    //   rootPath: join(__dirname, '..', 'files'),
+    // }),
   ],
   controllers: [AppController],
   providers: [AppService],

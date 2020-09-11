@@ -3,7 +3,7 @@
  * @author: hufan
  * @Date: 2020-08-31 14:37:05
  * @LastEditors: hufan
- * @LastEditTime: 2020-09-01 10:58:00
+ * @LastEditTime: 2020-09-11 10:57:30
  */
 import {
   Controller,
@@ -11,12 +11,12 @@ import {
   Body,
   ValidationPipe,
   BadRequestException,
-  UseGuards,
 } from '@nestjs/common';
 import { RegisterDTO, LoginDTO } from './dto';
 import { AuthService } from './auth.service';
-import { JwtAuthGuard } from './jwt-auth.guard';
+import { ApiTags, ApiBody } from '@nestjs/swagger';
 
+@ApiTags('AuthController')
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
@@ -31,6 +31,10 @@ export class AuthController {
   }
 
   @Post('login')
+  @ApiBody({
+    description: '用户登录',
+    type: LoginDTO,
+  })
   async login(
     @Body(
       new ValidationPipe({

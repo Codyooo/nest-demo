@@ -3,10 +3,10 @@
  * @author: hufan
  * @Date: 2020-08-31 14:35:03
  * @LastEditors: hufan
- * @LastEditTime: 2020-09-02 16:46:12
+ * @LastEditTime: 2020-09-10 15:28:07
  */
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Repository, FindOneOptions } from 'typeorm';
 import { UserEntity } from './user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 
@@ -21,6 +21,17 @@ export class UserService {
     const user = await this.userRepo.findOne({ username });
     if (!user) throw new NotFoundException('User not found');
     return user.toJSON();
+  }
+
+  async getCurrentUser(username: string) {
+    console.log('username', username);
+    const user = await this.userRepo.findOne({ username });
+    if (!user) throw new NotFoundException('user not found');
+    return user;
+  }
+
+  async findOne(option: FindOneOptions<UserEntity>) {
+    return await this.userRepo.findOne(option);
   }
 
   async findAll() {
