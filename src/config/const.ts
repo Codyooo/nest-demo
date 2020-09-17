@@ -3,7 +3,7 @@
  * @author: hufan
  * @Date: 2020-09-01 11:49:41
  * @LastEditors: hufan
- * @LastEditTime: 2020-09-01 11:53:10
+ * @LastEditTime: 2020-09-14 18:50:46
  */
 export interface EnvironmentVariables {
   PORT: number;

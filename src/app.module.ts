@@ -3,21 +3,20 @@
  * @author: hufan
  * @Date: 2020-08-31 11:57:19
  * @LastEditors: hufan
- * @LastEditTime: 2020-09-11 16:41:31
+ * @LastEditTime: 2020-09-15 16:05:58
  */
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { UserModule } from './user/user.module';
-import { AuthModule } from './auth/auth.module';
-import { GameModule } from './game/game.module';
-import { CommentsModule } from './comments/comments.module';
-import { UploadModule } from './upload/upload.module';
+import { UserModule } from './controllers/user/user.module';
+import { AuthModule } from './controllers/auth/auth.module';
+import { GameModule } from './controllers/game/game.module';
+import { CommentsModule } from './controllers/comments/comments.module';
+import { UploadModule } from './controllers/upload/upload.module';
 import { LoggerModule } from './logger/logger.module';
-import { ServeStaticModule } from '@nestjs/serve-static';
-import { join } from 'path';
+import { WinstonModule } from 'nest-winston';
+import { CourseModule } from './controllers/course/course.module';
+import * as winston from 'winston';
 
 @Module({
   imports: [
@@ -41,11 +40,11 @@ import { join } from 'path';
     CommentsModule,
     UploadModule,
     LoggerModule,
-    // ServeStaticModule.forRoot({
-    //   rootPath: join(__dirname, '..', 'files'),
-    // }),
+    WinstonModule.forRoot({
+      transports: new winston.transports.Console(),
+    }),
+    CourseModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
 })
 export class AppModule {}

@@ -2,6 +2,7 @@
 /dist
 /files
 /node_modules
+/pgdata
 
 # Logs
 logs
@@ -26,6 +27,7 @@ lerna-debug.log*
 *.launch
 .settings/
 *.sublime-workspace
+.env
 
 # IDE - VSCode
 .vscode/*
