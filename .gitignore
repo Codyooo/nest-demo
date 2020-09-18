@@ -3,6 +3,7 @@
 /files
 /node_modules
 /pgdata
+/cert
 
 # Logs
 logs
