@@ -3,7 +3,7 @@
  * @author: hufan
  * @Date: 2020-08-31 11:57:19
  * @LastEditors: hufan
- * @LastEditTime: 2020-09-18 11:36:11
+ * @LastEditTime: 2020-09-18 15:41:32
  */
 import { NestFactory, HttpAdapterHost } from '@nestjs/core';
 import { AppModule } from './app.module';
@@ -14,21 +14,18 @@ import { join } from 'path';
 import { AllExceptionFilter } from './filters/all-exception.filter';
 import { ResponseInterceptor } from './interceptors/response.interceptor';
 import * as express from 'express';
-import * as http from 'http';
 import * as https from 'https';
 import * as fs from 'fs';
 
 async function bootstrap() {
-  const cert = fs.readFileSync(
-    join(`${__dirname}`, '..', 'cert', '1_doubleq.icu_bundle.crt'),
-  );
-  const key = fs.readFileSync(
-    join(`${__dirname}`, '..', 'cert', '2_doubleq.icu.key'),
-  );
+  const cert = fs.readFileSync(join(`${__dirname}`, '..', 'cert', 'cert.crt'));
+  const key = fs.readFileSync(join(`${__dirname}`, '..', 'cert', 'key.key'));
+  const ca = fs.readFileSync(join(`${__dirname}`, '..', 'cert', 'ca.crt'));
 
-  const httpsOptions = {
+  const httpsOptions: https.ServerOptions = {
     key,
     cert,
+    ca,
   };
 
   const server = express();
