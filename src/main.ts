@@ -3,7 +3,7 @@
  * @author: hufan
  * @Date: 2020-08-31 11:57:19
  * @LastEditors: hufan
- * @LastEditTime: 2020-09-18 15:41:32
+ * @LastEditTime: 2020-09-18 16:20:52
  */
 import { NestFactory, HttpAdapterHost } from '@nestjs/core';
 import { AppModule } from './app.module';
@@ -61,7 +61,7 @@ async function bootstrap() {
 
   await app.init();
 
-  https.createServer(httpsOptions, server).listen(443);
+  // https.createServer(httpsOptions, server).listen(443);
   await app.listen(process.env.PORT || 4000);
 
   // await app.listen(process.env.PORT || 4000);
